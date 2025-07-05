@@ -18,4 +18,8 @@ test('returns sum for unknown amount of numbers', () => {
 
 test('returns sum when numbers are separated by commas and new lines', () => {
   expect(add("1\n2,3")).toBe(6);
+});
+
+test('returns sum when using custom delimiter', () => {
+  expect(add("//;\n1;2")).toBe(3);
 }); 
