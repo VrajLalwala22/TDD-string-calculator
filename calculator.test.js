@@ -6,4 +6,8 @@ test('returns 0 for empty string', () => {
 
 test('returns number for single number string', () => {
   expect(add("5")).toBe(5);
+});
+
+test('returns sum for two numbers', () => {
+  expect(add("1,2")).toBe(3);
 }); 
