@@ -7,13 +7,16 @@ function add(numbers) {
   if (numbers.startsWith("//")) {
     const delimiterLineEnd = numbers.indexOf("\n");
     const delimiterSection = numbers.slice(2, delimiterLineEnd);
-    // Support delimiters of any length: //[delimiter]\n
-    let delimiter = delimiterSection;
-    if (delimiter.startsWith("[")) {
-      delimiter = delimiterSection.match(/\[(.*)\]/)[1];
+    // Support multiple delimiters of any length: //[delim1][delim2]\n
+    const delimiterMatches = delimiterSection.match(/\[(.+?)\]/g);
+    if (delimiterMatches) {
+      // Remove brackets and escape regex special characters
+      const delimiters = delimiterMatches.map(d => d.slice(1, -1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      delimiterPattern = new RegExp(delimiters.join("|"));
+    } else {
+      // Single character delimiter
+      delimiterPattern = new RegExp(delimiterSection.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     }
-    // Escape special regex characters in delimiter
-    delimiterPattern = new RegExp(delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     numberString = numbers.slice(delimiterLineEnd + 1);
   }
   const numArray = numberString
