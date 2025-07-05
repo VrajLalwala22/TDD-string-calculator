@@ -1,9 +1,9 @@
 function add(numbers) {
   if (numbers === "") return 0;
-  // For a single number string, return its integer value
-  if (!numbers.includes(",")) return parseInt(numbers, 10);
-  const [a, b] = numbers.split(",");
-  return parseInt(a, 10) + parseInt(b, 10);
+  return numbers
+    .split(",")
+    .map(n => parseInt(n, 10))
+    .reduce((sum, n) => sum + n, 0);
 }
 
 module.exports = add; 
