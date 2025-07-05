@@ -6,8 +6,14 @@ function add(numbers) {
   // Check for custom delimiter
   if (numbers.startsWith("//")) {
     const delimiterLineEnd = numbers.indexOf("\n");
+    const delimiterSection = numbers.slice(2, delimiterLineEnd);
+    // Support delimiters of any length: //[delimiter]\n
+    let delimiter = delimiterSection;
+    if (delimiter.startsWith("[")) {
+      delimiter = delimiterSection.match(/\[(.*)\]/)[1];
+    }
     // Escape special regex characters in delimiter
-    delimiterPattern = new RegExp(numbers[2].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    delimiterPattern = new RegExp(delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     numberString = numbers.slice(delimiterLineEnd + 1);
   }
   const numArray = numberString
