@@ -26,4 +26,8 @@ test('returns sum when using custom delimiter', () => {
 
 test('throws exception for negative numbers with message including all negatives', () => {
   expect(() => add("1,-2,3,-4")).toThrow("negatives not allowed: -2,-4");
+});
+
+test('ignores numbers bigger than 1000', () => {
+  expect(add("2,1001")).toBe(2);
 }); 
