@@ -10,4 +10,8 @@ test('returns number for single number string', () => {
 
 test('returns sum for two numbers', () => {
   expect(add("1,2")).toBe(3);
+});
+
+test('returns sum for unknown amount of numbers', () => {
+  expect(add("1,2,3")).toBe(6);
 }); 
