@@ -17,7 +17,9 @@ function add(numbers) {
   if (negatives.length > 0) {
     throw new Error(`negatives not allowed: ${negatives.join(",")}`);
   }
-  return numArray.reduce((sum, n) => sum + n, 0);
+  return numArray
+    .filter(n => n <= 1000)
+    .reduce((sum, n) => sum + n, 0);
 }
 
 module.exports = add; 
