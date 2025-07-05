@@ -10,10 +10,14 @@ function add(numbers) {
     delimiterPattern = new RegExp(numbers[2].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     numberString = numbers.slice(delimiterLineEnd + 1);
   }
-  return numberString
+  const numArray = numberString
     .split(delimiterPattern)
-    .map(n => parseInt(n, 10))
-    .reduce((sum, n) => sum + n, 0);
+    .map(n => parseInt(n, 10));
+  const negatives = numArray.filter(n => n < 0);
+  if (negatives.length > 0) {
+    throw new Error(`negatives not allowed: ${negatives.join(",")}`);
+  }
+  return numArray.reduce((sum, n) => sum + n, 0);
 }
 
 module.exports = add; 
