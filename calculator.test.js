@@ -22,4 +22,8 @@ test('returns sum when numbers are separated by commas and new lines', () => {
 
 test('returns sum when using custom delimiter', () => {
   expect(add("//;\n1;2")).toBe(3);
+});
+
+test('throws exception for negative numbers with message including all negatives', () => {
+  expect(() => add("1,-2,3,-4")).toThrow("negatives not allowed: -2,-4");
 }); 
